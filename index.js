@@ -74,6 +74,7 @@ app.post('/mapa-astral', (req, res) => {
                 solar: getSigno(resultadosPlanetas.find(p => p.nome === 'Sol').longitude),
                 lunar: getSigno(resultadosPlanetas.find(p => p.nome === 'Lua').longitude),
                 ascendente: getSigno(ascendente),
+                meioDoCeu: getSigno(meioDoCeu)
             },
             planetas: resultadosPlanetas,
             casas: casas.house,
