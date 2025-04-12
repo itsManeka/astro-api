@@ -3,8 +3,18 @@ const cors = require('cors');
 const swisseph = require('swisseph');
 const path = require('path');
 
+const allowedOrigins = [process.env.URL_LOCAL, process.env.URL_OFICIAL];
+
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 app.use(express.json());
 
 swisseph.swe_set_ephe_path(path.join(__dirname, 'swisseph-data'));
